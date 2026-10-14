@@ -758,8 +758,8 @@
             let expiryDateHtml = row.Date_Of_Expiry ? `
               <div class="data-row">
                 <span class="data-label">Date of Expiry:</span>
-                <span class="data-val" style="${isExpired ? 'color:var(--red-alert); font-weight:800;' : ''}">
-                  <strong>${row.Date_Of_Expiry}</strong>${isExpired ? ' (Expired)' : ''}
+                <span class="data-val" style="${isExpired ? 'color:var(--red-alert);' : ''}">
+                  ${row.Date_Of_Expiry}${isExpired ? ' (Expired)' : ''}
                 </span>
               </div>
             ` : "";
