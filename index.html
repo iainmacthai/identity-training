@@ -221,6 +221,124 @@
       border: 1px solid #fecaca;
     }
 
+    /* Info Button Trigger */
+    .info-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #0284c7;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2px 4px;
+      margin-left: 4px;
+      vertical-align: middle;
+      border-radius: 50%;
+      transition: background 0.2s, color 0.2s;
+    }
+    .info-btn:hover {
+      background: #e0f2fe;
+      color: #0369a1;
+    }
+
+    /* Pop-Up Modal Styling */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(10, 37, 64, 0.68);
+      backdrop-filter: blur(3px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-overlay.active {
+      display: flex;
+    }
+    .modal-card {
+      background: #ffffff;
+      border-radius: 12px;
+      max-width: 480px;
+      width: 100%;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      overflow: hidden;
+      animation: popIn 0.2s ease-out;
+    }
+    @keyframes popIn {
+      from { transform: scale(0.96); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .modal-header {
+      padding: 12px 18px;
+      background: var(--navy-main);
+      color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-header h3 {
+      font-size: 14.5px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      margin: 0;
+    }
+    .modal-close-x {
+      background: none;
+      border: none;
+      color: #ffffff;
+      font-size: 24px;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0 4px;
+    }
+    .modal-body {
+      padding: 16px 18px;
+      overflow-y: auto;
+      font-size: 13px;
+      color: var(--text-main);
+      line-height: 1.55;
+    }
+    .modal-body h4 {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--navy-main);
+      margin-top: 10px;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .modal-body h4:first-child {
+      margin-top: 0;
+    }
+    .modal-body ul {
+      margin-left: 20px;
+      margin-bottom: 8px;
+    }
+    .modal-body li {
+      margin-bottom: 3px;
+    }
+    .modal-footer {
+      padding: 10px 18px;
+      background: #f8fafc;
+      border-top: 1px solid var(--slate-border);
+      display: flex;
+      justify-content: flex-end;
+    }
+    .btn-modal-close {
+      background: var(--navy-main);
+      color: #ffffff;
+      border: none;
+      padding: 7px 18px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 12.5px;
+      cursor: pointer;
+    }
+
     /* Toolbar Rows */
     .toolbar-row {
       display: flex;
@@ -521,7 +639,14 @@
         <!-- Metric 1: Files on Record -->
         <div class="compliance-metric">
           <div class="compliance-header">
-            <span>CORE MANDATORY FILES ON RECORD</span>
+            <span style="display:flex; align-items:center;">
+              CORE MANDATORY FILES ON RECORD
+              <button class="info-btn" onclick="openInfoModal()" title="View Core Module Requirements">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                </svg>
+              </button>
+            </span>
             <strong id="compliance-pct" style="font-size:13px; color:#0284c7;">0%</strong>
           </div>
           <div class="compliance-bar-bg">
@@ -586,12 +711,79 @@
 
   </main>
 
+  <!-- ==================== POP-UP MODAL (EDITABLE TEXT) ==================== -->
+  <div id="infoModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Core Module Requirements Matrix</h3>
+        <button class="modal-close-x" onclick="closeInfoModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="color:var(--text-muted); margin-bottom:10px;">
+          The 12 mandatory core qualifications required for offshore mobilization:
+        </p>
+
+        <h4>1. Identity &amp; Maritime Travel (4 Items)</h4>
+        <ul>
+          <li><strong>British Passport:</strong> 10-year validity required for all international mobilizations.</li>
+          <li><strong>Driving Licence (UK):</strong> Photo ID &amp; site vehicle mobilization.</li>
+          <li><strong>Seaman's Discharge Book:</strong> Record of sea service (valid until full).</li>
+          <li><strong>British Seaman's Card:</strong> Formal ILO maritime identification document.</li>
+        </ul>
+
+        <h4>2. Offshore Medical (1 Item)</h4>
+        <ul>
+          <li><strong>OEUK Offshore Medical:</strong> Required for UKCS and global energy assets (2-year renewal cycle).</li>
+        </ul>
+
+        <h4>3. Survival &amp; Escape (2 Items)</h4>
+        <ul>
+          <li><strong>FOET with EBS:</strong> Further Offshore Emergency Training with Emergency Breathing System (4-year validity).</li>
+          <li><strong>FOET with CA-EBS:</strong> Compressed Air Emergency Breathing System (OPITO accredited, 4-year validity).</li>
+        </ul>
+
+        <h4>4. Global Wind Organisation - Basic Safety (5 Items)</h4>
+        <ul>
+          <li><strong>GWO Fire Awareness (FAW):</strong> 2-year renewal cycle.</li>
+          <li><strong>GWO First Aid (FA):</strong> 2-year renewal cycle.</li>
+          <li><strong>GWO Working at Heights (WAH):</strong> 2-year renewal cycle.</li>
+          <li><strong>GWO Manual Handling (MH):</strong> 2-year renewal cycle.</li>
+          <li><strong>GWO Sea Survival (SS):</strong> 2-year renewal cycle.</li>
+        </ul>
+
+        <div style="margin-top:12px; padding:10px; background:#f0f9ff; border:1px solid #bae6fd; border-radius:6px; font-size:12px; color:#0369a1;">
+          <strong>Note:</strong> All additional client inductions, vessel passes, and vaccinations are logged below under Supplementary Records and do not affect this core readiness score.
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-modal-close" onclick="closeInfoModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     function copyText(str) {
       navigator.clipboard.writeText(str).then(() => {
         alert("Copied to clipboard: " + str);
       });
     }
+
+    // Modal Open/Close Controls
+    function openInfoModal() {
+      document.getElementById('infoModal').classList.add('active');
+    }
+
+    function closeInfoModal() {
+      document.getElementById('infoModal').classList.remove('active');
+    }
+
+    // Close modal when tapping outside the card
+    window.addEventListener('click', function(e) {
+      const modal = document.getElementById('infoModal');
+      if (e.target === modal) {
+        closeInfoModal();
+      }
+    });
 
     // Toggle specific containers (Core vs Supplementary)
     function toggleContainerDetails(openState, containerId) {
@@ -701,7 +893,6 @@
         </div>
       ` : "";
 
-      // Clean, identical font-size and weight
       let expiryDateHtml = row.Date_Of_Expiry ? `
         <div class="data-row">
           <span class="data-label">Date of Expiry:</span>
