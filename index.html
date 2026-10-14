@@ -118,6 +118,36 @@
       letter-spacing: 0.3px;
     }
 
+    /* Expand / Collapse Toolbar */
+    .toolbar-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2px;
+      margin-top: -2px;
+      margin-bottom: -2px;
+    }
+    .btn-toggle {
+      background: #ffffff;
+      border: 1px solid var(--slate-border);
+      color: var(--blue-accent);
+      font-family: inherit;
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      transition: all 0.15s ease;
+    }
+    .btn-toggle:hover {
+      background: var(--blue-soft);
+      border-color: #bae6fd;
+    }
+    .btn-toggle:active {
+      transform: translateY(1px);
+    }
+
     /* Expandable / Collapsible Styling */
     details {
       cursor: pointer;
@@ -275,7 +305,7 @@
 </head>
 <body>
 
-  <!-- Top Sticky Bar -->
+  <!-- Top Sticky Navigation -->
   <header class="top-bar">
     <div class="top-title">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
@@ -287,7 +317,7 @@
 
   <main class="container">
 
-    <!-- 1. Header Identity Profile (Always Visible) -->
+    <!-- 1. Header Identity Profile -->
     <section class="card profile-card">
       <img src="photo.jpg" alt="Iain MacMillan" class="profile-photo" onerror="this.src='https://placehold.co/110x140?text=Photo'">
       <div class="profile-meta">
@@ -298,7 +328,28 @@
       </div>
     </section>
 
-    <!-- 2. Primary Identity & Travel Documents (Collapsible) -->
+    <!-- 2. Standalone Industry Tracking Portal -->
+    <section class="card" style="background:#f0f9ff; border-color:#bae6fd;">
+      <div style="text-align:center; font-size:14.5px; font-weight:800; color:#0369a1; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.4px;">
+        Industry Tracking Portal
+      </div>
+      <div class="doc-num-row" style="border-bottom-color:#bae6fd;">
+        <span class="doc-number-text" style="color:#0369a1;">WINDA ID: IM058431GB</span>
+        <button class="copy-pill" onclick="copyText('IM058431GB')">Copy</button>
+      </div>
+      <a href="https://www.offshoreenergymanager.com/" target="_blank" class="btn-link">
+        <span>Open Offshore Energy Manager (Vissim)</span>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+      </a>
+    </section>
+
+    <!-- 3. Expand All / Collapse All Toolbar -->
+    <div class="toolbar-row">
+      <button class="btn-toggle" onclick="toggleAllDetails(true)">Expand All</button>
+      <button class="btn-toggle" onclick="toggleAllDetails(false)">Collapse All</button>
+    </div>
+
+    <!-- 4. Primary Identity & Travel Documents (Collapsible) -->
     <section class="card">
       <details>
         <summary>
@@ -395,26 +446,11 @@
               <span class="data-val">02 March 2027</span>
             </div>
           </div>
-
-          <!-- WINDA ID & Offshore Energy Manager -->
-          <div class="item-box" style="background:#f0f9ff; border-color:#bae6fd;">
-            <div class="item-header">
-              <span class="item-title" style="color:#0369a1;">Industry Tracking & Portal</span>
-            </div>
-            <div class="doc-num-row" style="border-bottom-color: #bae6fd;">
-              <span class="doc-number-text" style="color:#0369a1;">WINDA ID: IM058431GB</span>
-              <button class="copy-pill" onclick="copyText('IM058431GB')">Copy</button>
-            </div>
-            <a href="https://www.offshoreenergymanager.com/" target="_blank" class="btn-link">
-              <span>Open Offshore Energy Manager (Vissim)</span>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
-            </a>
-          </div>
         </div>
       </details>
     </section>
 
-    <!-- 3. Medical Section (Collapsible) -->
+    <!-- 5. Medical Section (Collapsible) -->
     <section class="card">
       <details>
         <summary>
@@ -450,7 +486,7 @@
       </details>
     </section>
 
-    <!-- 4. BOSIET / FOET Section (Collapsible) -->
+    <!-- 6. BOSIET / FOET Section (Collapsible) -->
     <section class="card">
       <details>
         <summary>
@@ -515,7 +551,7 @@
       </details>
     </section>
 
-    <!-- 5. GWO Courses (Collapsible) -->
+    <!-- 7. GWO Courses (Collapsible) -->
     <section class="card">
       <details>
         <summary>
@@ -636,7 +672,7 @@
       </details>
     </section>
 
-    <!-- 6. Additional Certification & Inductions (Collapsible) -->
+    <!-- 8. Additional Certification & Inductions (Collapsible) -->
     <section class="card">
       <details>
         <summary>
@@ -667,6 +703,12 @@
     function copyText(str) {
       navigator.clipboard.writeText(str).then(() => {
         alert("Copied to clipboard: " + str);
+      });
+    }
+
+    function toggleAllDetails(openState) {
+      document.querySelectorAll('details').forEach(el => {
+        el.open = openState;
       });
     }
   </script>
