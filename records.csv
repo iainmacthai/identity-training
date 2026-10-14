@@ -1,6 +1,6 @@
 Section,Title,Number_or_Ref,Issue_Number,Provider,Date_Of_Issue,Date_Of_Expiry,Cert_File
-Identity & Travel Documents,British Passport,151195760 (Copy),,,27 Nov 2024,27 Nov 2034,certs/
-Identity & Travel Documents,Driving Licence (UK),MCMIL702253I99EN (Copy),36,,07/06/2023,06/06/2033,certs/
+Identity & Travel Documents,British Passport,151195760,,,27 Nov 2024,27 Nov 2034,certs/
+Identity & Travel Documents,Driving Licence (UK),MCMIL702253I99EN,36,,07/06/2023,06/06/2033,certs/
 Identity & Travel Documents,Seaman's Discharge Book,DB00108869,,,02 March 2017,When Full,certs/
 Identity & Travel Documents,British Seaman's Card,SC00124875,,,02 March 2017,02 March 2027,certs/
 Offshore Medical,OEUK Offshore Medical,,,OEUK (Offshore Energies UK),03/09/2025,03/09/2027,certs/
