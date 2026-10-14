@@ -18,6 +18,7 @@
       --text-muted: #475569;
       --green-valid: #15803d;
       --green-bg: #f0fdf4;
+      --green-border: #bbf7d0;
       --red-alert: #b91c1c;
       --red-light: #fef2f2;
       --red-border: #ef4444;
@@ -155,24 +156,31 @@
       line-height: 1.3;
     }
 
-    /* Compliance Audit Widget Inside Portal Card */
+    /* Dual Compliance Audit Widget */
     .compliance-box {
       margin-top: 10px;
-      padding: 10px 12px;
+      padding: 12px;
       background: #ffffff;
       border: 1px solid #bae6fd;
       border-radius: 8px;
       box-shadow: 0 1px 3px rgba(2, 132, 199, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .compliance-metric {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
     }
     .compliance-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 800;
       color: #0369a1;
       letter-spacing: 0.4px;
-      margin-bottom: 6px;
     }
     .compliance-bar-bg {
       width: 100%;
@@ -180,7 +188,6 @@
       background: #e2e8f0;
       border-radius: 4px;
       overflow: hidden;
-      margin-bottom: 6px;
     }
     .compliance-bar-fill {
       height: 100%;
@@ -200,11 +207,18 @@
     .audit-alert-tag {
       font-size: 11px;
       font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+    .tag-green {
+      color: var(--green-valid);
+      background: var(--green-bg);
+      border: 1px solid var(--green-border);
+    }
+    .tag-red {
       color: var(--red-alert);
       background: var(--red-light);
       border: 1px solid #fecaca;
-      padding: 2px 7px;
-      border-radius: 4px;
     }
 
     /* Expand / Collapse Toolbar */
@@ -301,14 +315,23 @@
       font-weight: 800;
       color: var(--navy-main);
     }
+
+    /* Dynamic Validity Pills */
     .status-pill {
       font-size: 10.5px;
       font-weight: 800;
       padding: 2px 7px;
       border-radius: 4px;
+    }
+    .status-pill.valid {
       background: var(--green-bg);
       color: var(--green-valid);
-      border: 1px solid #bbf7d0;
+      border: 1px solid var(--green-border);
+    }
+    .status-pill.expired {
+      background: var(--red-light);
+      color: var(--red-alert);
+      border: 1.5px solid var(--red-border);
     }
 
     /* Document Number Row */
@@ -380,7 +403,7 @@
       background: #e0f2fe;
     }
 
-    /* Prominent Red Alert Badge for Missing Certificates */
+    /* Missing Certificate Badge (Red Alert) */
     .cert-missing-pill {
       display: inline-flex;
       align-items: center;
@@ -454,7 +477,7 @@
       <div class="role-badge">OFFSHORE & MARITIME TRAINING RECORDS</div>
     </section>
 
-    <!-- 2. Standalone Industry Tracking & Live Compliance Audit Box -->
+    <!-- 2. Standalone Industry Tracking & Dual Compliance Audit Box -->
     <section class="card" style="background:#f0f9ff; border-color:#bae6fd;">
       <div style="text-align:center; font-size:14px; font-weight:800; color:#0369a1; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.4px;">
         Industry Tracking & Compliance Portal
@@ -468,18 +491,38 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
       </a>
 
-      <!-- Live Compliance Audit Summary -->
+      <!-- Dual Compliance Audit Summary -->
       <div class="compliance-box">
-        <div class="compliance-header">
-          <span>DIGITAL DOCUMENT AUDIT</span>
-          <strong id="compliance-pct" style="font-size:13px; color:#0284c7;">0%</strong>
+        <!-- Metric 1: Files on Record -->
+        <div class="compliance-metric">
+          <div class="compliance-header">
+            <span>FILES ON RECORD (ATTACHMENTS)</span>
+            <strong id="compliance-pct" style="font-size:13px; color:#0284c7;">0%</strong>
+          </div>
+          <div class="compliance-bar-bg">
+            <div id="compliance-bar-fill" class="compliance-bar-fill"></div>
+          </div>
+          <div class="compliance-stats">
+            <span>Uploaded: <strong id="compliance-count" style="color:var(--navy-main);">0 / 0</strong></span>
+            <span id="compliance-missing-tag" class="audit-alert-tag tag-green">Calculating...</span>
+          </div>
         </div>
-        <div class="compliance-bar-bg">
-          <div id="compliance-bar-fill" class="compliance-bar-fill"></div>
-        </div>
-        <div class="compliance-stats">
-          <span>Files on Record: <strong id="compliance-count" style="color:var(--navy-main);">0 / 0</strong></span>
-          <span id="compliance-missing-tag" class="audit-alert-tag">Calculating...</span>
+
+        <div style="height: 1px; background: #e2e8f0; margin: 2px 0;"></div>
+
+        <!-- Metric 2: Training & Certs In Date -->
+        <div class="compliance-metric">
+          <div class="compliance-header">
+            <span>TRAINING &amp; CERTS IN DATE</span>
+            <strong id="validity-pct" style="font-size:13px; color:#15803d;">0%</strong>
+          </div>
+          <div class="compliance-bar-bg">
+            <div id="validity-bar-fill" class="compliance-bar-fill" style="background: linear-gradient(90deg, #16a34a 0%, #15803d 100%);"></div>
+          </div>
+          <div class="compliance-stats">
+            <span>In Date: <strong id="validity-count" style="color:var(--navy-main);">0 / 0</strong></span>
+            <span id="validity-alert-tag" class="audit-alert-tag tag-green">Calculating...</span>
+          </div>
         </div>
       </div>
     </section>
@@ -543,7 +586,47 @@
       "GWO Courses": `<svg width="22" height="22" viewBox="0 0 100 100" fill="currentColor"><circle cx="50" cy="40" r="5" fill="currentColor"/><path d="M48 40 L45 95 L55 95 L52 40 Z" fill="currentColor"/><path d="M50 40 Q47 20 50 5 Q53 20 50 40 Z" fill="currentColor"/><path d="M50 40 Q68 48 80 57 Q67 60 50 40 Z" fill="currentColor"/><path d="M50 40 Q32 48 20 57 Q33 60 50 40 Z" fill="currentColor"/></svg>`
     };
 
-    // Parse CSV and render dynamic accordions & audit metrics
+    // Robust Date Parser supporting UK DD/MM/YYYY, DD Month YYYY, and "When Full" / Permanent
+    function parseDate(dateStr) {
+      if (!dateStr) return null;
+      const s = dateStr.trim();
+      const lower = s.toLowerCase();
+
+      if (['when full', 'lifetime', 'permanent', 'no expiry', 'n/a', 'none', '-'].includes(lower)) {
+        return 'PERMANENT';
+      }
+
+      // Match DD/MM/YYYY or D/M/YYYY
+      const dmyMatch = s.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})$/);
+      if (dmyMatch) {
+        const day = parseInt(dmyMatch[1], 10);
+        const month = parseInt(dmyMatch[2], 10) - 1;
+        const year = parseInt(dmyMatch[3], 10);
+        return new Date(year, month, day, 23, 59, 59);
+      }
+
+      // Match DD Month YYYY (e.g., 27 Nov 2034, 02 March 2027)
+      const textMatch = s.match(/^(\d{1,2})\s+([a-zA-Z]+)\s+(\d{4})$/);
+      if (textMatch) {
+        const day = parseInt(textMatch[1], 10);
+        const monthStr = textMatch[2].toLowerCase();
+        const year = parseInt(textMatch[3], 10);
+        const monthMap = {
+          jan: 0, january: 0, feb: 1, february: 1, mar: 2, march: 2,
+          apr: 3, april: 3, may: 4, jun: 5, june: 5, jul: 6, july: 6,
+          aug: 7, august: 7, sep: 8, sept: 8, september: 8, oct: 9, october: 9,
+          nov: 10, november: 10, dec: 11, december: 11
+        };
+        if (monthMap.hasOwnProperty(monthStr)) {
+          return new Date(year, monthMap[monthStr], day, 23, 59, 59);
+        }
+      }
+
+      const fallback = new Date(s);
+      return isNaN(fallback.getTime()) ? null : fallback;
+    }
+
+    // Parse CSV and render dynamic accordions & dual audit metrics
     fetch('records.csv')
       .then(response => {
         if (!response.ok) throw new Error("Could not load records.csv");
@@ -564,39 +647,57 @@
           records.push(obj);
         }
 
-        // Calculate Compliance Metrics
-        let totalRecordsCount = records.length;
+        const now = new Date();
+        const totalRecordsCount = records.length;
         let attachedCertsCount = 0;
+        let validCertsCount = 0;
 
+        // Metric calculations
         records.forEach(row => {
+          // File check
           const path = (row.Cert_File || "").trim();
           const match = path.match(/\.([a-zA-Z0-9]+)$/);
-          if (match) {
-            const ext = match[1].toUpperCase();
-            if (["PDF", "JPG", "JPEG", "PNG", "WEBP"].includes(ext)) {
-              attachedCertsCount++;
-            }
+          if (match && ["PDF", "JPG", "JPEG", "PNG", "WEBP"].includes(match[1].toUpperCase())) {
+            attachedCertsCount++;
+          }
+
+          // Expiry check
+          const expDate = parseDate(row.Date_Of_Expiry);
+          if (expDate === 'PERMANENT' || (expDate instanceof Date && expDate >= now)) {
+            validCertsCount++;
           }
         });
 
-        const missingCertsCount = totalRecordsCount - attachedCertsCount;
-        const compliancePercentage = totalRecordsCount > 0 
-          ? Math.round((attachedCertsCount / totalRecordsCount) * 100) 
-          : 0;
-
-        // Populate Compliance UI
-        document.getElementById('compliance-pct').textContent = compliancePercentage + "%";
-        document.getElementById('compliance-bar-fill').style.width = compliancePercentage + "%";
+        // 1. Files on Record Metric UI
+        const missingFilesCount = totalRecordsCount - attachedCertsCount;
+        const filePct = totalRecordsCount > 0 ? Math.round((attachedCertsCount / totalRecordsCount) * 100) : 0;
+        document.getElementById('compliance-pct').textContent = filePct + "%";
+        document.getElementById('compliance-bar-fill').style.width = filePct + "%";
         document.getElementById('compliance-count').textContent = `${attachedCertsCount} / ${totalRecordsCount}`;
 
-        const missingTag = document.getElementById('compliance-missing-tag');
-        if (missingCertsCount === 0 && totalRecordsCount > 0) {
-          missingTag.textContent = "100% Complete";
-          missingTag.style.color = "#15803d";
-          missingTag.style.background = "#f0fdf4";
-          missingTag.style.borderColor = "#bbf7d0";
+        const fileTag = document.getElementById('compliance-missing-tag');
+        if (missingFilesCount === 0 && totalRecordsCount > 0) {
+          fileTag.textContent = "100% Complete";
+          fileTag.className = "audit-alert-tag tag-green";
         } else {
-          missingTag.textContent = `${missingCertsCount} Missing`;
+          fileTag.textContent = `${missingFilesCount} Missing`;
+          fileTag.className = "audit-alert-tag tag-red";
+        }
+
+        // 2. Training In Date Metric UI
+        const expiredCertsCount = totalRecordsCount - validCertsCount;
+        const validPct = totalRecordsCount > 0 ? Math.round((validCertsCount / totalRecordsCount) * 100) : 0;
+        document.getElementById('validity-pct').textContent = validPct + "%";
+        document.getElementById('validity-bar-fill').style.width = validPct + "%";
+        document.getElementById('validity-count').textContent = `${validCertsCount} / ${totalRecordsCount}`;
+
+        const validTag = document.getElementById('validity-alert-tag');
+        if (expiredCertsCount === 0 && totalRecordsCount > 0) {
+          validTag.textContent = "100% In Date";
+          validTag.className = "audit-alert-tag tag-green";
+        } else {
+          validTag.textContent = `${expiredCertsCount} Expired`;
+          validTag.className = "audit-alert-tag tag-red";
         }
 
         // Group records by Section
@@ -615,6 +716,10 @@
 
           let itemsHtml = "";
           items.forEach(row => {
+            // Determine individual item expiry
+            const parsedExpiry = parseDate(row.Date_Of_Expiry);
+            const isExpired = (parsedExpiry instanceof Date) && (parsedExpiry < now);
+
             let docNumHtml = "";
             if (row.Number_or_Ref) {
               docNumHtml = `
@@ -653,7 +758,9 @@
             let expiryDateHtml = row.Date_Of_Expiry ? `
               <div class="data-row">
                 <span class="data-label">Date of Expiry:</span>
-                <span class="data-val"><strong>${row.Date_Of_Expiry}</strong></span>
+                <span class="data-val" style="${isExpired ? 'color:var(--red-alert); font-weight:800;' : ''}">
+                  <strong>${row.Date_Of_Expiry}</strong>${isExpired ? ' (Expired)' : ''}
+                </span>
               </div>
             ` : "";
 
@@ -691,7 +798,7 @@
               <div class="item-box">
                 <div class="item-header">
                   <span class="item-title">${row.Title}</span>
-                  <span class="status-pill">Valid</span>
+                  <span class="status-pill ${isExpired ? 'expired' : 'valid'}">${isExpired ? 'Expired' : 'Valid'}</span>
                 </div>
                 ${docNumHtml}
                 ${issueNumHtml}
