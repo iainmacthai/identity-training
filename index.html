@@ -77,8 +77,8 @@
       align-items: center;
     }
     .profile-photo {
-      width: 88px;
-      height: 112px;
+      width: 90px;
+      height: 114px;
       border-radius: 8px;
       object-fit: cover;
       object-position: center 20%;
@@ -86,8 +86,11 @@
       background: #e2e8f0;
       flex-shrink: 0;
     }
+    .profile-meta {
+      flex: 1;
+    }
     .profile-meta h1 {
-      font-size: 20px;
+      font-size: 21px;
       font-weight: 800;
       color: var(--navy-main);
       line-height: 1.2;
@@ -97,19 +100,22 @@
       font-size: 13.5px;
       color: var(--text-muted);
       font-weight: 600;
-      line-height: 1.4;
+      line-height: 1.45;
     }
     .role-badge {
-      display: inline-block;
-      margin-top: 6px;
+      display: block;
+      width: 100%;
+      text-align: center;
+      margin-top: 8px;
       background: var(--blue-soft);
       color: var(--blue-accent);
       border: 1px solid #bae6fd;
-      font-size: 11px;
+      font-size: 11.5px;
       font-weight: 800;
-      padding: 2px 8px;
+      padding: 4px 8px;
       border-radius: 4px;
       text-transform: uppercase;
+      letter-spacing: 0.3px;
     }
 
     /* Section Headers */
@@ -213,6 +219,29 @@
     }
     .btn-link:hover { background: var(--navy-light); }
 
+    /* Collapsible Details */
+    details {
+      cursor: pointer;
+    }
+    details summary {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      user-select: none;
+    }
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+    .dropdown-arrow {
+      font-size: 11px;
+      transition: transform 0.2s ease;
+      color: var(--text-muted);
+    }
+    details[open] .dropdown-arrow {
+      transform: rotate(180deg);
+    }
+
     .footer {
       text-align: center;
       font-size: 11.5px;
@@ -240,8 +269,9 @@
       <img src="photo.jpg" alt="Iain MacMillan" class="profile-photo" onerror="this.src='https://placehold.co/110x140?text=Photo'">
       <div class="profile-meta">
         <h1>Iain MacMillan</h1>
+        <p>D.O.B: <strong>25/02/1973</strong></p>
         <p>Nationality: <strong>British</strong></p>
-        <span class="role-badge">Offshore & Maritime Personnel</span>
+        <div class="role-badge">OFFSHORE & MARITIME TRAINING RECORDS</div>
       </div>
     </section>
 
@@ -259,12 +289,12 @@
       <div class="item-box">
         <div class="item-header">
           <span class="item-title">British Passport</span>
-          <span class="status-pill">Valid (Copy)</span>
+          <span class="status-pill">Valid</span>
         </div>
         <div class="data-row">
           <span class="data-label">Number:</span>
           <span class="data-val">
-            151195760
+            151195760 (Copy)
             <button class="copy-pill" onclick="copyText('151195760')">Copy</button>
           </span>
         </div>
@@ -282,12 +312,12 @@
       <div class="item-box">
         <div class="item-header">
           <span class="item-title">Driving Licence (UK)</span>
-          <span class="status-pill">Valid (Copy)</span>
+          <span class="status-pill">Valid</span>
         </div>
         <div class="data-row">
-          <span class="data-label">Licence No:</span>
+          <span class="data-label">Number:</span>
           <span class="data-val">
-            MCMIL702253I99EN
+            MCMIL702253I99EN (Copy)
             <button class="copy-pill" onclick="copyText('MCMIL702253I99EN')">Copy</button>
           </span>
         </div>
@@ -296,8 +326,12 @@
           <span class="data-val">36</span>
         </div>
         <div class="data-row">
-          <span class="data-label">Validity:</span>
-          <span class="data-val">07/06/2023 &bull; 06/06/2033</span>
+          <span class="data-label">Date of Issue:</span>
+          <span class="data-val">07/06/2023</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Date of Expiry:</span>
+          <span class="data-val">06/06/2033</span>
         </div>
       </div>
 
@@ -305,21 +339,21 @@
       <div class="item-box">
         <div class="item-header">
           <span class="item-title">Seaman's Discharge Book</span>
-          <span class="status-pill">Active</span>
+          <span class="status-pill">Valid</span>
         </div>
         <div class="data-row">
-          <span class="data-label">Book Number:</span>
+          <span class="data-label">Number:</span>
           <span class="data-val">
             DB00108869
             <button class="copy-pill" onclick="copyText('DB00108869')">Copy</button>
           </span>
         </div>
         <div class="data-row">
-          <span class="data-label">Issue Date:</span>
+          <span class="data-label">Date of Issue:</span>
           <span class="data-val">02 March 2017</span>
         </div>
         <div class="data-row">
-          <span class="data-label">Expiry Date:</span>
+          <span class="data-label">Date of Expiry:</span>
           <span class="data-val">When Full</span>
         </div>
       </div>
@@ -328,21 +362,21 @@
       <div class="item-box">
         <div class="item-header">
           <span class="item-title">British Seaman's Card</span>
-          <span class="status-pill">Valid to 2027</span>
+          <span class="status-pill">Valid</span>
         </div>
         <div class="data-row">
-          <span class="data-label">Card Number:</span>
+          <span class="data-label">Number:</span>
           <span class="data-val">
             SC00124875
             <button class="copy-pill" onclick="copyText('SC00124875')">Copy</button>
           </span>
         </div>
         <div class="data-row">
-          <span class="data-label">Issue Date:</span>
+          <span class="data-label">Date of Issue:</span>
           <span class="data-val">02 March 2017</span>
         </div>
         <div class="data-row">
-          <span class="data-label">Expiry Date:</span>
+          <span class="data-label">Date of Expiry:</span>
           <span class="data-val">02 March 2027</span>
         </div>
       </div>
@@ -379,7 +413,7 @@
       <div class="item-box">
         <div class="item-header">
           <span class="item-title">OEUK Offshore Medical</span>
-          <span class="status-pill">Valid to 2027</span>
+          <span class="status-pill">Valid</span>
         </div>
         <div class="data-row">
           <span class="data-label">Medical Type:</span>
@@ -405,13 +439,10 @@
           <path d="M46 16 L40 60 L60 60 L54 16 Z" fill="none" stroke="currentColor" stroke-width="4"/>
           <line x1="43" y1="30" x2="57" y2="30" stroke="currentColor" stroke-width="3"/>
           <line x1="41" y1="45" x2="59" y2="45" stroke="currentColor" stroke-width="3"/>
-          <!-- Deck -->
           <rect x="15" y="60" width="70" height="10" rx="2" fill="currentColor"/>
-          <!-- Legs -->
           <line x1="25" y1="70" x2="20" y2="95" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
           <line x1="50" y1="70" x2="50" y2="95" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
           <line x1="75" y1="70" x2="80" y2="95" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
-          <!-- Crane -->
           <path d="M68 60 L85 40" stroke="currentColor" stroke-width="3"/>
         </svg>
         <span>BOSIET / FOET (OFFSHORE SURVIVAL)</span>
@@ -421,18 +452,18 @@
       <div class="item-box">
         <div class="item-header">
           <span class="item-title">FOET with EBS</span>
-          <span class="status-pill">Valid to 2029</span>
+          <span class="status-pill">Valid</span>
         </div>
         <div class="data-row">
-          <span class="data-label">Course Ref / Provider:</span>
+          <span class="data-label">Ref / Provider:</span>
           <span class="data-val">5858 (Petans)</span>
         </div>
         <div class="data-row">
-          <span class="data-label">Issue Date:</span>
+          <span class="data-label">Date of Issue:</span>
           <span class="data-val">04/09/2025</span>
         </div>
         <div class="data-row">
-          <span class="data-label">Expiry Date:</span>
+          <span class="data-label">Date of Expiry:</span>
           <span class="data-val"><strong>10/09/2029</strong></span>
         </div>
       </div>
@@ -441,18 +472,18 @@
       <div class="item-box">
         <div class="item-header">
           <span class="item-title">FOET with CA-EBS</span>
-          <span class="status-pill">Valid to 2029</span>
+          <span class="status-pill">Valid</span>
         </div>
         <div class="data-row">
-          <span class="data-label">Course Ref / Provider:</span>
+          <span class="data-label">Ref / Provider:</span>
           <span class="data-val">5850 (Petans)</span>
         </div>
         <div class="data-row">
-          <span class="data-label">Issue Date:</span>
+          <span class="data-label">Date of Issue:</span>
           <span class="data-val">04/09/2025</span>
         </div>
         <div class="data-row">
-          <span class="data-label">Expiry Date:</span>
+          <span class="data-label">Date of Expiry:</span>
           <span class="data-val"><strong>10/09/2029</strong></span>
         </div>
       </div>
@@ -463,15 +494,10 @@
       <div class="sec-head">
         <!-- Wind Turbine SVG Icon -->
         <svg width="22" height="22" viewBox="0 0 100 100" fill="currentColor">
-          <!-- Hub -->
           <circle cx="50" cy="40" r="5" fill="currentColor"/>
-          <!-- Tower -->
           <path d="M48 40 L45 95 L55 95 L52 40 Z" fill="currentColor"/>
-          <!-- Blade 1 (Up) -->
           <path d="M50 40 Q47 20 50 5 Q53 20 50 40 Z" fill="currentColor"/>
-          <!-- Blade 2 (Bottom Right) -->
           <path d="M50 40 Q68 48 80 57 Q67 60 50 40 Z" fill="currentColor"/>
-          <!-- Blade 3 (Bottom Left) -->
           <path d="M50 40 Q32 48 20 57 Q33 60 50 40 Z" fill="currentColor"/>
         </svg>
         <span>GWO COURSES (GLOBAL WIND ORGANISATION)</span>
@@ -481,15 +507,19 @@
       <div class="item-box">
         <div class="item-header">
           <span class="item-title">GWO First Aid Refresher (FAW)</span>
-          <span class="status-pill">Valid to 2027</span>
+          <span class="status-pill">Valid</span>
         </div>
         <div class="data-row">
           <span class="data-label">Provider:</span>
           <span class="data-val">Hexis</span>
         </div>
         <div class="data-row">
-          <span class="data-label">Validity:</span>
-          <span class="data-val">04/04/2025 &bull; <strong>04/04/2027</strong></span>
+          <span class="data-label">Date of Issue:</span>
+          <span class="data-val">04/04/2025</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Date of Expiry:</span>
+          <span class="data-val"><strong>04/04/2027</strong></span>
         </div>
       </div>
 
@@ -497,15 +527,19 @@
       <div class="item-box">
         <div class="item-header">
           <span class="item-title">GWO First Aid (FA)</span>
-          <span class="status-pill">Valid to 2027</span>
+          <span class="status-pill">Valid</span>
         </div>
         <div class="data-row">
           <span class="data-label">Provider:</span>
           <span class="data-val">Hexis</span>
         </div>
         <div class="data-row">
-          <span class="data-label">Validity:</span>
-          <span class="data-val">07/04/2025 &bull; <strong>04/04/2027</strong></span>
+          <span class="data-label">Date of Issue:</span>
+          <span class="data-val">07/04/2025</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Date of Expiry:</span>
+          <span class="data-val"><strong>04/04/2027</strong></span>
         </div>
       </div>
 
@@ -513,15 +547,19 @@
       <div class="item-box">
         <div class="item-header">
           <span class="item-title">GWO Working at Heights (WAH)</span>
-          <span class="status-pill">Valid to 2027</span>
+          <span class="status-pill">Valid</span>
         </div>
         <div class="data-row">
           <span class="data-label">Provider:</span>
           <span class="data-val">Petans</span>
         </div>
         <div class="data-row">
-          <span class="data-label">Validity:</span>
-          <span class="data-val">28-29/07/2025 &bull; <strong>29/07/2027</strong></span>
+          <span class="data-label">Date of Issue:</span>
+          <span class="data-val">28-29/07/2025</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Date of Expiry:</span>
+          <span class="data-val"><strong>29/07/2027</strong></span>
         </div>
       </div>
 
@@ -529,15 +567,19 @@
       <div class="item-box">
         <div class="item-header">
           <span class="item-title">GWO Manual Handling (MH)</span>
-          <span class="status-pill">Valid to 2027</span>
+          <span class="status-pill">Valid</span>
         </div>
         <div class="data-row">
           <span class="data-label">Provider:</span>
           <span class="data-val">Petans</span>
         </div>
         <div class="data-row">
-          <span class="data-label">Validity:</span>
-          <span class="data-val">29/07/2025 &bull; <strong>29/07/2027</strong></span>
+          <span class="data-label">Date of Issue:</span>
+          <span class="data-val">29/07/2025</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Date of Expiry:</span>
+          <span class="data-val"><strong>29/07/2027</strong></span>
         </div>
       </div>
 
@@ -545,35 +587,46 @@
       <div class="item-box">
         <div class="item-header">
           <span class="item-title">GWO Sea Survival (SS)</span>
-          <span class="status-pill">Valid to 2027</span>
+          <span class="status-pill">Valid</span>
         </div>
         <div class="data-row">
           <span class="data-label">Provider:</span>
           <span class="data-val">Petans</span>
         </div>
         <div class="data-row">
-          <span class="data-label">Validity:</span>
-          <span class="data-val">30/07/2025 &bull; <strong>30/07/2027</strong></span>
+          <span class="data-label">Date of Issue:</span>
+          <span class="data-val">30/07/2025</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Date of Expiry:</span>
+          <span class="data-val"><strong>30/07/2027</strong></span>
         </div>
       </div>
     </section>
 
-    <!-- 6. Others / Additional Certification -->
+    <!-- 6. Additional Certification & Inductions (Collapsible / Default Closed) -->
     <section class="card">
-      <div class="sec-head">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
-        </svg>
-        <span>OTHERS & ADDITIONAL CERTIFICATIONS</span>
-      </div>
-      <div class="item-box" style="text-align:center; color:var(--text-muted); font-size:13px; padding:16px;">
-        Additional company-specific site inductions, safety passports, and vessel certifications can be logged here.
-      </div>
+      <details>
+        <summary>
+          <div class="sec-head" style="margin-bottom:0; border-bottom:none; padding-bottom:0; flex:1;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+            </svg>
+            <span>ADDITIONAL CERTIFICATION & INDUCTIONS</span>
+          </div>
+          <span class="dropdown-arrow">▼</span>
+        </summary>
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1.5px solid var(--slate-border);">
+          <div class="item-box" style="text-align:center; color:var(--text-muted); font-size:13px; padding:16px;">
+            Additional company-specific site inductions, safety passports, client approvals, and vessel certifications can be logged here.
+          </div>
+        </div>
+      </details>
     </section>
 
     <footer class="footer">
       <p>Iain MacMillan &bull; Professional Certification & Training Verification</p>
-      <p>Hosted via GitHub Pages &bull; Updated October 2026</p>
+      <p>Hosted via GitHub Pages</p>
     </footer>
 
   </main>
